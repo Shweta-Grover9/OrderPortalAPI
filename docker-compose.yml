@@ -1,0 +1,36 @@
+version: '3.5'
+services:
+  myorders-app:
+    build: 
+      context: '.'
+    container_name: 'order_php'
+    volumes:
+      - ./api:/var/www/html/
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    ports:
+      - 8080:80
+    networks:
+      - app-network
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3307:3306"
+    dns_search: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    container_name: ${APP_NAME}_mysql
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
