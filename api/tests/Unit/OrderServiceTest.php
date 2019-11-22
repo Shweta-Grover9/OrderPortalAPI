@@ -28,7 +28,7 @@ class OrderServiceTest extends TestCase
      */
     public function testCreateOrder($distanceData)
     {
-        echo "\n----Test case of success in creating the order (OrderService).---";
+        echo "\n----Test case of success in creating the order (OrderService).---\n";
         
         $distanceResult = '{
            "destination_addresses": [
@@ -70,6 +70,7 @@ class OrderServiceTest extends TestCase
         $this->mockOrderRepo->shouldReceive('insertRecords')->andReturn($orderObject);
         $response = $this->orderService->createOrder($requestParams);
         $this->assertArrayHasKey('id', $response);
+        
     }
 
     /**
@@ -80,7 +81,7 @@ class OrderServiceTest extends TestCase
      */
     public function testOrderException($request, $function)
     {
-        echo "\n----Test case of exception in creating and fetching the order (OrderService).---";
+        echo "\n----Test case of exception in creating and fetching the order (OrderService).---\n";
         
         $this->expectException(\Exception::class);
 
@@ -94,7 +95,7 @@ class OrderServiceTest extends TestCase
      */
     public function testUpdateOrderAlreadyTaken()
     {
-        echo "\n----Test case of order already updated (OrderService).---";
+        echo "\n----Test case of order already updated (OrderService).---\n";
         
         $orderId = 1;
         $requestParams = [
@@ -113,7 +114,7 @@ class OrderServiceTest extends TestCase
      */
     public function testUpdateOrderNotExist()
     {
-        echo "\n----Test case of order not found (OrderService).---";
+        echo "\n----Test case of order not found (OrderService).---\n";
         
         $orderId = 1;
         $requestParams = [
@@ -130,7 +131,7 @@ class OrderServiceTest extends TestCase
      */
     public function testUpdateOrderSuccess()
     {
-        echo "\n----Test case of success in updating the order (OrderService).---";
+        echo "\n----Test case of success in updating the order (OrderService).---\n";
         
         $orderId = 1;
         $requestParams = [
@@ -151,7 +152,7 @@ class OrderServiceTest extends TestCase
      */
     public function testUpdateOrderException()
     {
-        echo "\n----Test case in exception of order (OrderService).---";
+        echo "\n----Test case in exception of order (OrderService).---\n";
         
         $this->expectException(\Exception::class);
         $orderId = 1;
@@ -168,7 +169,7 @@ class OrderServiceTest extends TestCase
      */
     public function testFetchOrderSuccess()
     {
-        echo "\n----Test case of successfully fetching of orders (OrderService).---";
+        echo "\n----Test case of successfully fetching of orders (OrderService).---\n";
         
         $requestParams = [
             'page'=>1,
@@ -197,7 +198,7 @@ class OrderServiceTest extends TestCase
      */
     public function testFetchOrderFail()
     {
-        echo "\n----Test case in failure of  fetching of orders (OrderService).---";
+        echo "\n----Test case in failure of  fetching of orders (OrderService).---\n";
         
         $requestParams = [
             'page'=>1,
@@ -239,7 +240,7 @@ class OrderServiceTest extends TestCase
      */
     public function testEmptyFormulateResult()
     {
-        echo "\n----Test case to cover distance caching (OrderService).---";
+        echo "\n----Test case to cover distance caching (OrderService).---\n";
         
         $distanceResult = '{
            "destination_addresses": [

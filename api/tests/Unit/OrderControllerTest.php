@@ -36,7 +36,7 @@ class OrderControllerTest extends TestCase
     {
         echo "\n <<<<<< Starting Unit Test Cases >>>>>> \n";
         
-        echo "\n----Failed test case in creation of order in Controller.---";
+        echo "\n----Failed test case in creation of order in Controller.---\n";
         
         $requestParams = [
             "origin"=> ["28.704060", "77.102493"],
@@ -57,7 +57,7 @@ class OrderControllerTest extends TestCase
      */
     public function testStoreOrderSuccess()
     {
-        echo "\n----Positive test case in creation of order in Controller.---";
+        echo "\n----Positive test case in creation of order in Controller.---\n";
         
         $requestParams = [
             "origin"=> ["28.704060", "77.102493"],
@@ -86,7 +86,7 @@ class OrderControllerTest extends TestCase
      */
     public function testStoreOrderInvalid($requestParams)
     {
-        echo "\n----Test case of invalid parameters in creation of order.---";
+        echo "\n----Test case of invalid parameters in creation of order.---\n";
         $response =  $this->call('POST', '/orders', $requestParams);
         $response->assertJsonStructure(['errors']);
     }
@@ -143,7 +143,7 @@ class OrderControllerTest extends TestCase
      */
     public function testCreateOrderException()
     {
-        echo "\n----Test case of exception in creation of order.---";
+        echo "\n----Test case of exception in creation of order.---\n";
         
         $requestParams = [
             "origin"=> ["28.704060", "77.102493"],
@@ -167,7 +167,7 @@ class OrderControllerTest extends TestCase
      */
     public function testUpdateOrderScenario($orderId, $orderServiceResponse, $responseKey)
     {
-        echo "\n----Test case of Update order positive and negative scenarios.---";
+        echo "\n----Test case of Update order positive and negative scenarios.---\n";
         
         $request = new UpdateOrderRequest();
         $requestParams = [
@@ -203,7 +203,7 @@ class OrderControllerTest extends TestCase
      */
     public function testUpdateOrderException()
     {
-        echo "\n----Test case of exception in taking the order.---";
+        echo "\n----Test case of exception in taking the order.---\n";
         
         $requestParams = [
             'status' => 'TAKEN'
@@ -226,7 +226,7 @@ class OrderControllerTest extends TestCase
      */
     public function testUpdateOrderInvalidParams()
     {
-        echo "\n----Test case of invalid request in taking the order.---";
+        echo "\n----Test case of invalid request in taking the order.---\n";
         
         $requestParams = [
             'status1' => 'TAKEN'
@@ -242,7 +242,7 @@ class OrderControllerTest extends TestCase
      */
     public function testShowOrderInvalidParams($requestParams)
     {
-        echo "\n----Test case of invalid request in fetching the order.---";
+        echo "\n----Test case of invalid request in fetching the order.---\n";
         
         $response =  $this->call('GET', '/orders', $requestParams);
         $response->assertJsonStructure(['errors']);
@@ -282,7 +282,7 @@ class OrderControllerTest extends TestCase
     
     public function testShowOrderSucceess()
     {
-        echo "\n----Test case of positive scenario in fetching the order.---";
+        echo "\n----Test case of positive scenario in fetching the order.---\n";
         
         $requestParams = [
             'page'=>1,
@@ -313,6 +313,8 @@ class OrderControllerTest extends TestCase
      */
     public function testShowOrderException()
     {
+        echo "\n----Test case of exception in fetching the order.---\n";
+        
         $requestParams = [
             'page'=>1,
             'limit'=>1
