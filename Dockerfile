@@ -1,11 +1,10 @@
 FROM php:7.2-apache
 
 # 1. development packages
-RUN apt-get install -y \
-    curl
+RUN apt-get update -y && apt-get install -y git && apt-get install -y curl
 
 RUN yes | pecl install xdebug \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
     
@@ -36,3 +35,4 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 COPY . /var/www/html/
 EXPOSE 80
+
