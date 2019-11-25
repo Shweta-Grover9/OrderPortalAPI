@@ -1,7 +1,7 @@
 FROM php:7.2-apache
 
 # 1. development packages
-RUN apt-get update -y && apt-get install -y git && apt-get install -y curl
+RUN apt-get update -y && apt-get install -y git && apt-get install -y curl && apt-get install -y zip && apt-get install -y unzip
 
 RUN yes | pecl install xdebug \
      && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
