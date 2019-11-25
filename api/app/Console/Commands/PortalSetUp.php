@@ -43,11 +43,11 @@ class PortalSetUp extends Command
         
         $this->callSilent('route:clear');
 
-       echo "#### Executing Unit Test Cases ####";
-       echo "".shell_exec('php ./vendor/phpunit/phpunit/phpunit ./tests/Unit 2>&1');
-       
        echo "#### Executing Integration Test Cases ####";
        echo "".shell_exec('php ./vendor/phpunit/phpunit/phpunit ./tests/Feature 2>&1');
+       
+       echo "#### Executing Unit Test Cases ####";
+       echo "".shell_exec('php ./vendor/phpunit/phpunit/phpunit ./tests/Unit 2>&1');
        
        $this->callSilent('l5-swagger:generate');
     }

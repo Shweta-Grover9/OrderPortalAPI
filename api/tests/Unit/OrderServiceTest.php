@@ -26,9 +26,11 @@ class OrderServiceTest extends TestCase
      *
      *@dataProvider createOrderProvider
      */
-    public function testCreateOrder($distanceData)
+    public function testCreateOrder($distanceData, $comment)
     {
         echo "\n----Test case of success in creating the order (OrderService).---\n";
+        
+        echo "------".$comment."------\n";
         
         $distanceResult = '{
            "destination_addresses": [
@@ -81,7 +83,7 @@ class OrderServiceTest extends TestCase
      */
     public function testOrderException($request, $function)
     {
-        echo "\n----Test case of exception in creating and fetching the order (OrderService).---\n";
+        echo "\n----Test case of exception in ".$function." the order (OrderService).---\n";
         
         $this->expectException(\Exception::class);
 
@@ -291,8 +293,8 @@ class OrderServiceTest extends TestCase
         $distanceObj = new \stdClass();
         $distanceObj->distance = 1;
         return [
-            [null], 
-            [$distanceObj]
+            [null, 'Distance is not cached will be fetched from google API'], 
+            [$distanceObj, 'Distance is cached will be fetched from database']
         ];
     }
     

@@ -75,9 +75,11 @@ class OrderIntegrationTest extends TestCase
      * @dataProvider createOrderProvider
      *
      */
-    public function testCreateOrderInvalidParameters($requestParams)
+    public function testCreateOrderInvalidParameters($requestParams, $comment)
     {
         echo "\n <<<<<< Create Order Invalid parameters Scenario >>>>>> \n";
+        
+        echo "------".$comment."------\n";
         
         $this->post('/orders', $requestParams)->assertJsonStructure([
             'errors' => [
@@ -95,36 +97,37 @@ class OrderIntegrationTest extends TestCase
     {
         return [
             [
-                "destination" => [
-                    "28.4595",
-                    "77.0266"
-                ]
+                [
+                    "destination" => [
+                        "28.4595",
+                        "77.0266"
+                    ],
+                ],
+                'Origin is not passed in request'  
             ],
             [
                 [
                     "origin" => [
                         "28.4595",
-                    ]
-                ],
-                [
+                    ],
                     "destination" => [
                         "28.4595",
                         "77.0266"
                     ]
                 ],
+                'Start Longitude is not mentioned'
             ],
             [
                 [
                     "origin" => [
                         "284595",
-                    ]
-                ],
-                [
+                    ],
                     "destination" => [
                         "28.4595",
                         "77.0266"
                     ]
-                ],
+                 ],
+                'Start Latitude is not in correct format'
             ]
         ];
     }

@@ -84,9 +84,12 @@ class OrderControllerTest extends TestCase
      *@dataProvider storeOrderProvider
      *
      */
-    public function testStoreOrderInvalid($requestParams)
+    public function testStoreOrderInvalid($requestParams, $comment)
     {
-        echo "\n----Test case of invalid parameters in creation of order.---\n";
+        echo "\n----Test case of invalid parameters in creation of order..---\n";
+        
+        echo "------".$comment."------\n";
+        
         $response =  $this->call('POST', '/orders', $requestParams);
         $response->assertJsonStructure(['errors']);
     }
@@ -103,36 +106,42 @@ class OrderControllerTest extends TestCase
                 [
                     'origin'=>[]
                     
-                ]
+                ],
+                'Empty Array Origin'
             ],
             [
                 [
                     'origin'=>''
-                ]
+                ],
+                'Origin is not array'
             ],
             [
                 [
                     'origin'=>[1],
                     'destination'=>[1]
-                ]
+                ],
+                'Integer values are passed in request instead of string'
             ],
             [
                 [
                     'origin'=>["28.704060", "77.102493","77.102493"],
                     "destination"=> ["28.4595","114.182446"]
-                ]
+                ],
+                'Size of origin is not 2'
             ],
             [
                 [
                     'origin'=> [28.704060, "77.102493"],
                     "destination"=> [28.4595,"114.182446"]
-                ]
+                ],
+                'Float values are passed in origin and destination'
             ],
             [
                 [
                     'origin'=>["128.704060", "277.102493"],
                     'destination'=>["128.704060", "277.102493"]
-                ]
+                ],
+                'Latitude and longitude values are out of bounds'
             ],
         ];
     }
@@ -165,9 +174,11 @@ class OrderControllerTest extends TestCase
      * 
      * @dataProvider updateOrderProvider
      */
-    public function testUpdateOrderScenario($orderId, $orderServiceResponse, $responseKey)
+    public function testUpdateOrderScenario($orderId, $orderServiceResponse, $responseKey, $comment)
     {
         echo "\n----Test case of Update order positive and negative scenarios.---\n";
+        
+        echo "------".$comment."------\n";
         
         $request = new UpdateOrderRequest();
         $requestParams = [
@@ -189,11 +200,11 @@ class OrderControllerTest extends TestCase
     public function updateOrderProvider()
     {
         return [
-            [1, 409, 'error'],
-            [1, 404, 'error'],
-            [1, 500, 'error'],
-            [0, 500, 'error'],
-            [1, true, 'status'],
+            [1, 409, 'error', 'Order already exist'],
+            [1, 404, 'error', 'Order not found'],
+            [1, 500, 'error', 'Order is able to changes its status'],
+            [0, 500, 'error', 'Order id is not passed'],
+            [1, true, 'status', 'Order status changed successfully'],
         ];
     }
     
@@ -222,11 +233,12 @@ class OrderControllerTest extends TestCase
     /**
      * Test case for update order scenarios.
      *
-     * @dataProvider updateOrderProvider
+     * 
      */
     public function testUpdateOrderInvalidParams()
     {
         echo "\n----Test case of invalid request in taking the order.---\n";
+        
         
         $requestParams = [
             'status1' => 'TAKEN'
@@ -237,12 +249,15 @@ class OrderControllerTest extends TestCase
     }
     
     /**
+     * test case for invalid parameters.
      * 
      * @dataProvider showOrderProvider
      */
-    public function testShowOrderInvalidParams($requestParams)
+    public function testShowOrderInvalidParams($requestParams, $comment)
     {
         echo "\n----Test case of invalid request in fetching the order.---\n";
+        
+        echo "------".$comment."------\n";
         
         $response =  $this->call('GET', '/orders', $requestParams);
         $response->assertJsonStructure(['errors']);
@@ -257,25 +272,30 @@ class OrderControllerTest extends TestCase
         return [
             [
                 [
-                    'page'=> 5
-                ]
+                    'page'=> 5,
+                ],
+                'Limit is not passed in fetching order'
             ],
             [
                 [
-                    'limit'=> 5
-                ]
+                    'limit'=> 5,
+                    
+                ],
+                'Page is not passed in fetching order'
             ],
             [
                 [
                     'page'=> 'a',
                     'limit'=> 'a'
-                ]
+                ],
+                'Format of page and limit are not correct in fetching order'
             ],
             [
                 [
                     'page'=> 0,
                     'limit'=> 0
-                ]
+                ],
+                '0 is passed in page and limit'
             ]
         ];
     }
