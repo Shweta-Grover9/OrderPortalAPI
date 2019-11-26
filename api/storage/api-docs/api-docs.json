@@ -6,7 +6,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/orders": {
+        "/orders": {
             "get": {
                 "tags": [
                     "Orders"
@@ -83,7 +83,7 @@
                 }
             }
         },
-        "/api/orders/{id}": {
+        "/orders/{id}": {
             "patch": {
                 "tags": [
                     "Orders"

@@ -33,7 +33,7 @@ class OrderController extends BaseController
 
     /**
      * @OA\Post(
-     *      path="/api/orders",
+     *      path="/orders",
      *      operationId="createOrders",
      *      tags={"Orders"},
      *      summary="Create orders",
@@ -86,7 +86,7 @@ class OrderController extends BaseController
 
     /**
      * @OA\Patch(
-     *      path="/api/orders/{id}",
+     *      path="/orders/{id}",
      *      operationId="takeOrders",
      *      tags={"Orders"},
      *      summary="Take orders",
@@ -147,7 +147,7 @@ class OrderController extends BaseController
 
     /**
      * @OA\Get(
-     *      path="/api/orders",
+     *      path="/orders",
      *      operationId="showOrders",
      *      tags={"Orders"},
      *      summary="Get list of orders",
