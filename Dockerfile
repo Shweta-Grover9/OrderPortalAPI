@@ -33,6 +33,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # so when we execute CLI commands, all the host file's ownership remains intact
 # otherwise command from inside container will create root-owned files and directories
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-COPY . /var/www/html/
+COPY ./api /var/www/html/
 EXPOSE 80
 

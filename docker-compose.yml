@@ -5,7 +5,6 @@ services:
       context: '.'
     container_name: 'order_php'
     volumes:
-      - ./api:/var/www/html/
       - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     ports:
       - 8080:80

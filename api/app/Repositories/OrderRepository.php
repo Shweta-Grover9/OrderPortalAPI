@@ -121,8 +121,8 @@ class OrderRepository
 
             // Handling of race condition
             $isUpdated = DB::transaction(function () use ($orderId, $status) {
-                $order = Order::lockForUpdate()->find($orderId);
-                if (! empty($order)) {
+                $order = Order::lockForUpdate()->where('id', $orderId)->where('status', self::UNASSIGNED_STATUS)->first();
+                if (!empty($order)) {
                     $order->status = strtoupper($status);
                     return $order->save();
                 } else {
@@ -164,10 +164,14 @@ class OrderRepository
      * @param integer $orderId
      * @throws \Exception
      */
-    public function isOrderTaken($orderId)
+    public function isOrderTaken($order)
     {
         try {
-            return Order::where('id', $orderId)->where('status', self::TAKEN_STATUS)->first();
+            if (!empty($order->status) && $order->status == self::TAKEN_STATUS) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (\Exception $exception) {
             throw $exception;
         }

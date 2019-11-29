@@ -59,8 +59,8 @@ class OrderService
             $isOrderExist = $this->orderRepository->checkOrderExist($orderId);
 
             if (! empty($isOrderExist)) {
-                $isOrderTaken = $this->orderRepository->isOrderTaken($orderId);
-                if (empty($isOrderTaken)) {
+                $isOrderTaken = $this->orderRepository->isOrderTaken($isOrderExist);
+                if ($isOrderTaken === false) {
                     return $this->orderRepository->updateOrder($requestParams, $orderId);
                 } else {
                     return config('config.order_taken_code');

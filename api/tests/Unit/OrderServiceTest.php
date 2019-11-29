@@ -142,7 +142,7 @@ class OrderServiceTest extends TestCase
         $isOrdertaken = null;
         $orderUpdated = true;
         $this->mockOrderRepo->shouldReceive('checkOrderExist')->andReturn(true);
-        $this->mockOrderRepo->shouldReceive('isOrderTaken')->andReturn($isOrdertaken);
+        $this->mockOrderRepo->shouldReceive('isOrderTaken')->andReturn(false);
         $this->mockOrderRepo->shouldReceive('updateOrder')->andReturn($orderUpdated);
         $response = $this->orderService->updateOrder($requestParams, $orderId);
         $this->assertTrue($response);
