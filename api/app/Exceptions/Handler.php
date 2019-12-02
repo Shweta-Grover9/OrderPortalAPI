@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, \Exception $exception)
     {
         $errors = [
             'error' => __('message.route_not_found')
