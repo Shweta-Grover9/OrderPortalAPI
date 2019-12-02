@@ -68,7 +68,17 @@
                                         }
                                     }
                                 },
-                                "type": "object"
+                                "type": "object",
+                                "example": {
+                                    "origin": [
+                                        "28.6746",
+                                        "77.1802"
+                                    ],
+                                    "destination": [
+                                        "28.4595",
+                                        "77.0266"
+                                    ]
+                                }
                             }
                         }
                     }

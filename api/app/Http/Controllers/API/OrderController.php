@@ -55,7 +55,8 @@ class OrderController extends BaseController
      *                      @OA\Items(
      *                          type="string"
      *                     )
-     *                 )
+     *                 ),
+     *                  example={"origin": {"28.6746", "77.1802"}, "destination": {"28.4595", "77.0266"}}
      *             )
      *           )
      *     ),
